@@ -42,32 +42,32 @@ export function AppSidebar({userRole, ...props }: {userRole:{role:string} & Reac
       ? adminRoutes
       : userRole?.role === "user"
       ? userRoutes
-      : userRoutes; 
+      : null; 
   
-
-  return (
-    <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
-              <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent>
+if(routes?.documents.length===0 || !routes ){
+  return null;
+}
+ return ( <Sidebar collapsible="offcanvas" {...props}>
+  <SidebarHeader>
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          asChild
+        >
+          <a href="#">
+            <IconInnerShadowTop className="!size-5" />
+            <span className="text-base font-semibold">Acme Inc.</span>
+          </a>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  </SidebarHeader>
+  <SidebarContent>
         <NavDocuments items={routes?.documents} />
-      </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={routes?.user} />
-      </SidebarFooter>
-    </Sidebar>
+
+  </SidebarContent>
+
+</Sidebar>
+  
   )
 }

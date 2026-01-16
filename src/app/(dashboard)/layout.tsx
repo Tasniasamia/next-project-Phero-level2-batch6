@@ -1,17 +1,21 @@
+"use client";
 import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { SectionCards } from "@/components/section-cards"
+
 import { SiteHeader } from "@/components/site-header"
 import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import React from "react"
+import { setRoleCookie } from "@/helpers/utils";
+import React, { useEffect } from "react"
 
 
 export default function Page({admin,user}:{admin:React.ReactNode,user:React.ReactNode}) {
     
-    const userRole:{role:string}={role:'user'};
+    const userRole:{role:"admin"|"user"}={role:"admin"};
+    useEffect(()=>{
+      setRoleCookie(userRole?.role);
+    },[userRole?.role])
   return (
     <SidebarProvider
       style={
@@ -25,7 +29,7 @@ export default function Page({admin,user}:{admin:React.ReactNode,user:React.Reac
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2 gap-7">
+          <div className="@container/main flex flex-1 flex-col gap-7 p-6">
           {userRole.role === "admin"? admin:user}
           </div>
         </div>
