@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import './globals.css';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { AuthProvider } from "@/providers/authProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,7 +37,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-        {/* <Navbar1/> */}
+        <AuthProvider>
+        <Navbar1/>
         {/* <div className="flex gap-2">
         <Button asChild><Link href="/about">About</Link></Button>
         <Button asChild><Link href="/blog">Blog</Link></Button>
@@ -45,6 +47,7 @@ export default function RootLayout({
 
 
         {children}
+        </AuthProvider>
       </ThemeProvider>
       
       </body>

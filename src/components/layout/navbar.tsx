@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { ModeToggle } from "./modeToggle";
+import { useAuth } from "@/providers/authProvider";
 
 interface MenuItem {
   title: string;
@@ -148,6 +149,9 @@ const Navbar1 = ({
   },
   className,
 }: Navbar1Props) => {
+
+  const data=useAuth();
+  console.log(data);
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto py-4">
@@ -221,8 +225,11 @@ const Navbar1 = ({
                   >
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
-
-                  <div className="flex flex-col gap-3">
+                 {/* {data ? (<span>
+                 {data?.user?.name}
+                 </span>):(   
+                  */}
+                 <div className="flex flex-col gap-3">
                     <Button asChild variant="outline">
                       <a href={auth.login.url}>{auth.login.title}</a>
                     </Button>
@@ -230,6 +237,8 @@ const Navbar1 = ({
                       <a href={auth.signup.url}>{auth.signup.title}</a>
                     </Button>
                   </div>
+                  {/* )} */}
+               
                 </div>
               </SheetContent>
             </Sheet>
