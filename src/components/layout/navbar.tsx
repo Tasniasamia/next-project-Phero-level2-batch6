@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { ModeToggle } from "./modeToggle";
-import { useAuth } from "@/providers/authProvider";
 
 interface MenuItem {
   title: string;
@@ -61,6 +60,7 @@ interface Navbar1Props {
 }
 
 const Navbar1 = ({
+  
   logo = {
     url: "https://www.shadcnblocks.com",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
@@ -149,8 +149,7 @@ const Navbar1 = ({
   },
   className,
 }: Navbar1Props) => {
-  const data = useAuth();
-  console.log(data);
+
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto py-4">
@@ -178,9 +177,9 @@ const Navbar1 = ({
           </div>
           <div className="flex gap-2">
             <ModeToggle />
-            {data ? (
+            {/* {data ? (
                     <div className="text-red-500">{data?.name || "user"}</div>
-                  ) : (
+                  ) : ( */}
               <div>
                 <Button asChild variant="outline" size="sm">
                   <a href={auth.login.url}>{auth.login.title}</a>
@@ -189,7 +188,7 @@ const Navbar1 = ({
                   <a href={auth.signup.url}>{auth.signup.title}</a>
                 </Button>
               </div>
-            )}
+            {/* )} */}
           </div>
         </nav>
 
@@ -230,9 +229,9 @@ const Navbar1 = ({
                   >
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
-                  {data ? (
+                  {/* {data ? (
                     <div className="text-red-500">{data?.name || "user"}</div>
-                  ) : (
+                  ) : ( */}
                     <div className="flex flex-col gap-3">
                       <Button asChild variant="outline">
                         <a href={auth.login.url}>{auth.login.title}</a>
@@ -241,7 +240,7 @@ const Navbar1 = ({
                         <a href={auth.signup.url}>{auth.signup.title}</a>
                       </Button>
                     </div>
-                  )}
+                  {/* )} */}
                 </div>
               </SheetContent>
             </Sheet>
