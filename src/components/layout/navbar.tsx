@@ -149,8 +149,7 @@ const Navbar1 = ({
   },
   className,
 }: Navbar1Props) => {
-
-  const data=useAuth();
+  const data = useAuth();
   console.log(data);
   return (
     <section className={cn("py-4", className)}>
@@ -178,13 +177,19 @@ const Navbar1 = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <ModeToggle/>
-            <Button asChild variant="outline" size="sm">
-              <a href={auth.login.url}>{auth.login.title}</a>
-            </Button>
-            <Button asChild size="sm">
-              <a href={auth.signup.url}>{auth.signup.title}</a>
-            </Button>
+            <ModeToggle />
+            {data ? (
+                    <div className="text-red-500">{data?.name || "user"}</div>
+                  ) : (
+              <div>
+                <Button asChild variant="outline" size="sm">
+                  <a href={auth.login.url}>{auth.login.title}</a>
+                </Button>
+                <Button asChild size="sm">
+                  <a href={auth.signup.url}>{auth.signup.title}</a>
+                </Button>
+              </div>
+            )}
           </div>
         </nav>
 
@@ -225,20 +230,18 @@ const Navbar1 = ({
                   >
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
-                 {/* {data ? (<span>
-                 {data?.user?.name}
-                 </span>):(   
-                  */}
-                 <div className="flex flex-col gap-3">
-                    <Button asChild variant="outline">
-                      <a href={auth.login.url}>{auth.login.title}</a>
-                    </Button>
-                    <Button asChild>
-                      <a href={auth.signup.url}>{auth.signup.title}</a>
-                    </Button>
-                  </div>
-                  {/* )} */}
-               
+                  {data ? (
+                    <div className="text-red-500">{data?.name || "user"}</div>
+                  ) : (
+                    <div className="flex flex-col gap-3">
+                      <Button asChild variant="outline">
+                        <a href={auth.login.url}>{auth.login.title}</a>
+                      </Button>
+                      <Button asChild>
+                        <a href={auth.signup.url}>{auth.signup.title}</a>
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
@@ -266,7 +269,7 @@ const renderMenuItem = (item: MenuItem) => {
   }
 
   return (
-    <NavigationMenuItem key={item.title}  asChild>
+    <NavigationMenuItem key={item.title} asChild>
       <Link
         href={item.url}
         className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"

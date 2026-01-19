@@ -1,25 +1,43 @@
-"use client"
+"use client";
 
-import { authClient } from "@/lib/auth_client"
-import React, { createContext, useContext, useState } from "react"
+import React, { createContext, useContext, useEffect, useState } from "react";
 
+type AuthUser = any; // চাইলে proper type বসাতে পারো
 
+const AuthContext = createContext<AuthUser | null>(null);
 
-const AuthContext = createContext<{} | null>(null)
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [loading, setLoading] = useState(true);
 
-export  function AuthProvider({ children }: { children: React.ReactNode }) {
-    const { data: session } = authClient.useSession()
-  
+  useEffect(() => {
+    const getSession = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/get-session", {
+          method: "GET",
+          credentials: "include", // ✅ cookie যাবে server এ
+        });
+
+        const data = await res.json();
+        setUser(data?.user ?? null);
+      } catch (err) {
+        console.error("Failed to get session", err);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getSession();
+  }, []); // ✅ important
+
   return (
-    <AuthContext.Provider value={session}>
-      {children}
+    <AuthContext.Provider value={user}>
+      {!loading && children}
     </AuthContext.Provider>
-  )
+  );
 }
+
 export const useAuth = () => {
-  const ctx = useContext(AuthContext);
-  // if (!ctx) {
-  //   throw new Error("useSignup must be used inside SignupProvider")
-  // }
-  return ctx;
-}
+  return useContext(AuthContext);
+};
