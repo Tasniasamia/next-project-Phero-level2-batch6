@@ -6,7 +6,7 @@ import './globals.css';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { AuthProvider } from "@/providers/authProvider";
-import { userService } from "@/services/user.service";
+// import { userService } from "@/services/user.service";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,21 +27,20 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const {data,error}=await userService.getSelection();
-
+// const {data,error}=await userService.getSession()
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-          {/* <ThemeProvider
+          <ThemeProvider
             attribute="class"
             defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
-        <AuthProvider> */}
-        <Navbar1 />
+        <AuthProvider>
+         <Navbar1 />
         {/* <div className="flex gap-2">
         <Button asChild><Link href="/about">About</Link></Button>
         <Button asChild><Link href="/blog">Blog</Link></Button>
@@ -50,8 +49,8 @@ export default async function RootLayout({
 
 
         {children}
-        {/* </AuthProvider>
-      </ThemeProvider> */}
+        </AuthProvider>
+      </ThemeProvider>
       
       </body>
     </html>

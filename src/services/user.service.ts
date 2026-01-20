@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 
 export const userService={
-    getSelection: async function (){
+    getSession: async function (){
         try{
           const cookie=await cookies();
           const res = await fetch("http://localhost:5000/api/auth/get-session", {
@@ -9,6 +9,7 @@ export const userService={
             cache:'no-store'
           });
           const data=await res.json();
+          console.log(data);
           return {data,error:null}
           }
         catch(error){

@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { ModeToggle } from "./modeToggle";
+import { useAuth } from "@/providers/authProvider";
 
 interface MenuItem {
   title: string;
@@ -38,6 +39,28 @@ interface MenuItem {
 }
 
 interface Navbar1Props {
+  // data?: {session:{  id: string;
+  //   userId: string;
+  //   token: string;
+  
+  //   createdAt: string;   // ISO string
+  //   updatedAt: string;   // ISO string
+  //   expiresAt: string;   // ISO string
+  
+  //   ipAddress: string;
+  //   userAgent: string;},
+  // user:{  id: string;
+  //   email: string;
+  //   name: string;
+  
+  //   role: "USER" | "ADMIN"; // extend if needed
+  //   emailVerified: boolean;
+  //   twoFactorEnabled: boolean;
+  
+  //   image: string | null;
+  
+  //   createdAt: string;
+  //   updatedAt: string;}};
   className?: string;
   logo?: {
     url: string;
@@ -60,7 +83,7 @@ interface Navbar1Props {
 }
 
 const Navbar1 = ({
-  
+  // data,
   logo = {
     url: "https://www.shadcnblocks.com",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
@@ -149,7 +172,8 @@ const Navbar1 = ({
   },
   className,
 }: Navbar1Props) => {
-
+  const data=useAuth();
+  console.log("provider data2",data);
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto py-4">
@@ -177,9 +201,9 @@ const Navbar1 = ({
           </div>
           <div className="flex gap-2">
             <ModeToggle />
-            {/* {data ? (
-                    <div className="text-red-500">{data?.name || "user"}</div>
-                  ) : ( */}
+            {data ? (
+                    <div className="text-red-500">{data?.user?.name || "user"}</div>
+                  ) : (
               <div>
                 <Button asChild variant="outline" size="sm">
                   <a href={auth.login.url}>{auth.login.title}</a>
@@ -188,7 +212,7 @@ const Navbar1 = ({
                   <a href={auth.signup.url}>{auth.signup.title}</a>
                 </Button>
               </div>
-            {/* )} */}
+           )} 
           </div>
         </nav>
 

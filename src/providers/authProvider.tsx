@@ -1,5 +1,6 @@
 "use client";
 
+import { env } from "@/env";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type AuthUser = any; // চাইলে proper type বসাতে পারো
@@ -13,7 +14,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const getSession = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/auth/get-session", {
+        const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL2}/api/auth/get-session`, {
           method: "GET",
           credentials: "include", // ✅ cookie যাবে server এ
         });

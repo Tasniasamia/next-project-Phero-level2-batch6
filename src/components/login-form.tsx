@@ -16,11 +16,39 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { signIn } from "@/lib/auth_client"
+import axios from "axios";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const handleSubmit =async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
+    await axios.post('http://localhost:5000/api/auth/sign-in/email', {
+    email:email,
+    password:password
+    },{
+      headers: {
+        'Content-Type': 'application/json',
+        
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+      if(response?.data?.twoFactorRedirect){
+
+        console.log(response);
+       alert('Please verify your otp')
+      }
+    })
+    .catch(function (error) {
+      alert(error?.message);
+      console.log(error);
+    })
+  }
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -31,13 +59,14 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit}>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
                   type="email"
+                  name="email"
                   placeholder="m@example.com"
                   required
                 />
@@ -52,7 +81,7 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password"name="password" type="password" required />
               </Field>
               <Field>
                 <Button type="submit">Login</Button>

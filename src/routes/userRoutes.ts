@@ -1,5 +1,6 @@
+import { route } from "@/types";
 
-export const userRoutes :{user:{name:string,email:string,avatar:string},documents:{name:string,url:string}[]} = {
+export const userRoutes:route= {
     user: {
       name: "User",
       email: "user@gmail.com",
