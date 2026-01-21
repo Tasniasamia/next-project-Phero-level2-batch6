@@ -1,7 +1,6 @@
-// import { userService } from "@/services/user.service";
+export const dynamicParams = false;
 
 export default async function Home() {
-
 
   return (
 <div>
