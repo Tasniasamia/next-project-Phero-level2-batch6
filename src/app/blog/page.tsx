@@ -25,7 +25,7 @@ import { blogService } from "@/services/blog.service";
 import BlogList from "@/components/modules/blog/card";
 
 export default function Page() {
-  const postsPromise = blogService.getPost(); // ❗ Server এ Promise
+  const postsPromise = blogService.getPost(); 
 
   return (
     <Suspense fallback={<p>Loading...</p>}>
