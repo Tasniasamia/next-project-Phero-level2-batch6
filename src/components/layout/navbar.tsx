@@ -39,28 +39,6 @@ interface MenuItem {
 }
 
 interface Navbar1Props {
-  // data?: {session:{  id: string;
-  //   userId: string;
-  //   token: string;
-  
-  //   createdAt: string;   // ISO string
-  //   updatedAt: string;   // ISO string
-  //   expiresAt: string;   // ISO string
-  
-  //   ipAddress: string;
-  //   userAgent: string;},
-  // user:{  id: string;
-  //   email: string;
-  //   name: string;
-  
-  //   role: "USER" | "ADMIN"; // extend if needed
-  //   emailVerified: boolean;
-  //   twoFactorEnabled: boolean;
-  
-  //   image: string | null;
-  
-  //   createdAt: string;
-  //   updatedAt: string;}};
   className?: string;
   logo?: {
     url: string;
@@ -92,67 +70,7 @@ const Navbar1 = ({
   },
   menu = [
     { title: "Home", url: "/" },
-    // {
-    //   title: "Products",
-    //   url: "#",
-    //   items: [
-    //     {
-    //       title: "Blog",
-    //       description: "The latest industry news, updates, and info",
-    //       icon: <Book className="size-5 shrink-0" />,
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Company",
-    //       description: "Our mission is to innovate and empower the world",
-    //       icon: <Trees className="size-5 shrink-0" />,
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Careers",
-    //       description: "Browse job listing and discover our workspace",
-    //       icon: <Sunset className="size-5 shrink-0" />,
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Support",
-    //       description:
-    //         "Get in touch with our support team or visit our community forums",
-    //       icon: <Zap className="size-5 shrink-0" />,
-    //       url: "#",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Resources",
-    //   url: "#",
-    //   items: [
-    //     {
-    //       title: "Help Center",
-    //       description: "Get all the answers you need right here",
-    //       icon: <Zap className="size-5 shrink-0" />,
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Contact Us",
-    //       description: "We are here to help you with any questions you have",
-    //       icon: <Sunset className="size-5 shrink-0" />,
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Status",
-    //       description: "Check the current status of our services and APIs",
-    //       icon: <Trees className="size-5 shrink-0" />,
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Terms of Service",
-    //       description: "Our terms and conditions for using our services",
-    //       icon: <Book className="size-5 shrink-0" />,
-    //       url: "#",
-    //     },
-    //   ],
-    // },
+   
     {
       title: "About",
       url: "/about",
@@ -167,8 +85,8 @@ const Navbar1 = ({
     },
   ],
   auth = {
-    login: { title: "Login", url: "#" },
-    signup: { title: "Sign up", url: "#" },
+    login: { title: "Login", url: "/login" },
+    signup: { title: "Sign up", url: "/signup" },
   },
   className,
 }: Navbar1Props) => {
@@ -206,10 +124,10 @@ const Navbar1 = ({
                   ) : (
               <div>
                 <Button asChild variant="outline" size="sm">
-                  <a href={auth.login.url}>{auth.login.title}</a>
+                  <Link href={auth.login.url}>{auth.login.title}</Link>
                 </Button>
                 <Button asChild size="sm">
-                  <a href={auth.signup.url}>{auth.signup.title}</a>
+                  <Link href={auth.signup.url}>{auth.signup.title}</Link>
                 </Button>
               </div>
            )} 
