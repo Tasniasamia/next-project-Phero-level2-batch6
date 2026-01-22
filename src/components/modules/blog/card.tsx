@@ -66,10 +66,10 @@ export default function BlogList({
   posts: Promise<{ data: Post[] |any}>;
 }) {
   const resolved = use(posts);
-  console.log("posts",posts);
+  // console.log("posts",posts);
 
   const data = resolved.data;
-console.log("data",data?.data);
+// console.log("data",data?.data);
   return (
     <div>
       {data?.data?.map((post:Post) => (

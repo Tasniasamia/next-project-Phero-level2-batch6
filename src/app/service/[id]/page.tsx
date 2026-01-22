@@ -12,14 +12,14 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { data, error } = await blogService.getPost();
-  console.log(data);
+  // console.log(data);
   const { id } = await params;
   return (
     <div>
       <div>My Post: {id}</div>
 
       {data?.data?.map((service: any) => {
-        return <p> Service title is {service?.title}</p>;
+        return <p key={service.id}> Service title is {service?.title}</p>;
       })}
     </div>
   );

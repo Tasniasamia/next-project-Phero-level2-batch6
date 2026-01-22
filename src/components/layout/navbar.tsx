@@ -91,7 +91,7 @@ const Navbar1 = ({
   className,
 }: Navbar1Props) => {
   const data=useAuth();
-  console.log("provider data2",data);
+  // console.log("provider data2",data);
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto py-4">

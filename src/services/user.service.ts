@@ -9,11 +9,11 @@ export const userService={
             cache:'no-store'
           });
           const data=await res.json();
-          console.log(data);
+          // console.log(data);
           return {data,error:null}
           }
         catch(error){
-            console.error(error);
+            // console.error(error);
             return {data:null,error}
         }
     }

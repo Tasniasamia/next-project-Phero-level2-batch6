@@ -14,7 +14,7 @@ export const proxy=async(request:NextRequest)=>{
     isAdmin=data?.user?.role===roles.ADMIN;
 
    }
-   console.log("isAdmin",isAdmin);
+  //  console.log("isAdmin",isAdmin);
 
    if(!isAuthenticate){
     return NextResponse.redirect(new URL('/login',request.url));
