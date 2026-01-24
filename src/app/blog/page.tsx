@@ -1,3 +1,5 @@
+/*Checking by environment variable*/
+
 // import BlogList from "@/components/modules/blog/card";
 // import { env } from "@/env";
 // import { blogService } from "@/services/blog.service";
@@ -16,20 +18,35 @@
 //         </div>
 //     );
 // };
-
 // export default page;
 
 
-import { Suspense } from "react";
-import { blogService } from "@/services/blog.service";
-import BlogList from "@/components/modules/blog/card";
 
-export default function Page() {
-  const postsPromise = blogService.getPost(); 
 
+/*For use() hook promise sending*/
+
+// import { Suspense } from "react";
+// import { blogService } from "@/services/blog.service";
+// import BlogList from "@/components/modules/blog/card";
+
+// export default function Page() {
+//   const postsPromise = blogService.getPost(); 
+
+//   return (
+//     <Suspense fallback={<p>Loading...</p>}>
+//       <BlogList posts={postsPromise} />
+//     </Suspense>
+//   );
+// }
+
+import BlogSubComponent from '@/components/modules/blog/blogSubComponent';
+
+const page = () => {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <BlogList posts={postsPromise} />
-    </Suspense>
+    <div>
+      <BlogSubComponent/>
+    </div>
   );
-}
+};
+
+export default page;

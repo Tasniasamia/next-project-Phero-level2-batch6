@@ -2,11 +2,11 @@ import { PostStatus } from "@/constants/postStatus";
 import { env } from "@/env";
 
 interface QueryOptions {
-  search: string | undefined;
+  search: string ;
   tags: string;
-  isFeatured: boolean | undefined;
-  status: PostStatus | undefined;
-  authId: string | undefined;
+  isFeatured: boolean ;
+  status: PostStatus;
+  authId: string ;
   page: number;
   limit: number;
   skip: number;
@@ -24,10 +24,18 @@ export const blogService = {
     options?: TOptions
   ) => {
     try {
+      console.log("coming here");
       const url = new URL(`${env.BACKEND_URL}/post`);
       if(queries){
         Object.entries(queries).forEach(([key, value]) => {
-            url.searchParams.append(key, value);
+          //  if((value!="") && (value!=undefined) && (value!=null)){
+          //   url.searchParams.append(key, value);
+          //  }
+          // console.log("key",key,"value",value)
+          if (![ "", undefined, null ].includes(value)) {
+            url.searchParams.append(key, String(value));
+          }
+          
           });
       }
      
@@ -40,7 +48,10 @@ export const blogService = {
       }
       const res = await fetch(url.toString(), config);
       const data = await res.json();
-      return { data: data, error: null };
+      console.log("data of service",data);
+
+      
+      return {data:data,error:null}
     } catch (err) {
       return { data: null, error: { message: "Something Went Wrong" } };
     }
