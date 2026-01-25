@@ -35,8 +35,6 @@ import { userRoutes } from "@/routes/userRoutes"
 import { roles } from "@/constants/roles"
 import { Role } from "@/types"
 
-
-
 export function AppSidebar({userRole, ...props }: {userRole:{role:Role} & React.ComponentProps<typeof Sidebar>}) {
   const routes =
     userRole?.role === roles.ADMIN
@@ -48,7 +46,8 @@ export function AppSidebar({userRole, ...props }: {userRole:{role:Role} & React.
 if(routes?.documents.length===0 || !routes ){
   return null;
 }
- return ( <Sidebar collapsible="offcanvas" {...props}>
+return ( 
+ <Sidebar collapsible="offcanvas" {...props}>
   <SidebarHeader>
     <SidebarMenu>
       <SidebarMenuItem>
@@ -64,11 +63,9 @@ if(routes?.documents.length===0 || !routes ){
     </SidebarMenu>
   </SidebarHeader>
   <SidebarContent>
-        <NavDocuments items={routes?.documents} />
-
-  </SidebarContent>
-
-</Sidebar>
+  <NavDocuments items={routes?.documents} />
+</SidebarContent>
+ </Sidebar>
   
   )
 }

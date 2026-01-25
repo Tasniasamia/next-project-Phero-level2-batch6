@@ -2,8 +2,7 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 export const env = createEnv({
-
-  server: {
+ server: {
     BACKEND_URL_VARIABLE: z.url(),
     BACKEND_URL: z.url(),
     PORT: z.coerce.number(),

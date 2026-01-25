@@ -3,7 +3,6 @@ import { userService } from "./services/user.service";
 import { roles } from "./constants/roles";
 
 export const proxy=async(request:NextRequest)=>{
-  // try{
    const {data}=await userService.getSession();
    let isAuthenticate=false;
    let isAdmin=false;
@@ -14,24 +13,21 @@ export const proxy=async(request:NextRequest)=>{
     isAdmin=data?.user?.role===roles.ADMIN;
 
    }
-  //  console.log("isAdmin",isAdmin);
 
    if(!isAuthenticate){
     return NextResponse.redirect(new URL('/login',request.url));
 
    }  
-    if(isAdmin && path.startsWith('/user')){
+    if(isAdmin && path.startsWith('/dashboard')){
     return  NextResponse.redirect(new URL('/admin',request.url));
     }
 
     if(!isAdmin && path.startsWith('/admin')){
-    return  NextResponse.redirect(new URL('/user',request.url));
+    return  NextResponse.redirect(new URL('/dashboard',request.url));
     }
    return NextResponse.next();
-
-
 }
 
 export const config={
-  matcher: ['/admin','/user','/admin/:path*', '/user/:path*']
+  matcher: ['/admin','/dashboard','/admin/:path*', '/dashboard/:path*']
 }

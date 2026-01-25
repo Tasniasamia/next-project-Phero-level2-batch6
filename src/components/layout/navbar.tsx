@@ -85,6 +85,10 @@ const Navbar1 = ({
       title: "Contact",
       url: "/contact",
     },
+    {
+      title:"Dashboard",
+      url:"/dashboard"
+    }
     
   ],
   auth = {
@@ -104,10 +108,10 @@ const Navbar1 = ({
       setUser(data?.data);
     })();
   }, []);
-  user?.role === roles.ADMIN ? menu.push( {
-    title: "dashboard",
-    url: "/admin",
-  }): user?.role === roles.USER && menu.push({title:"dashboard",url:"/dashboard/create_blog"})
+  // user?.role === roles.ADMIN ? menu.push( {
+  //   title: "dashboard",
+  //   url: "/admin",
+  // }): user?.role === roles.USER && menu.push({title:"dashboard",url:"/dashboard/create_blog"})
   console.log("navber user data", user);
   return (
     <section className={cn("py-4", className)}>
