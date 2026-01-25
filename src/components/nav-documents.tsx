@@ -35,7 +35,7 @@ export function NavDocuments({
   }[] 
 }) {
   const { isMobile } = useSidebar()
-
+console.log("items",items);
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Documents</SidebarGroupLabel>

@@ -2,12 +2,13 @@
 
 import { PostStatus } from "@/constants/postStatus";
 import { blogService } from "@/services/blog.service";
+import { PostStatustype } from "@/types/post.status.type";
 
 interface QueryOptions {
   search: string;
   tags: string;
   isFeatured: boolean ;
-  status: PostStatus ;
+  status: PostStatustype ;
   authId: string ;
   page: number;
   limit: number;

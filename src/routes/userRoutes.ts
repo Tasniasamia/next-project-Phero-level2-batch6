@@ -9,12 +9,12 @@ export const userRoutes:route= {
    
     documents: [
       {
-        name: "user",
-        url: "/user",
+        name: "Create Blog",
+        url: "/dashboard/create_blog",
       },
       {
-        name: "favourite",
-        url: "/favourite",
-      }
+        name: "Setting",
+        url: "/dashboard/setting",
+      },
     ],
   }

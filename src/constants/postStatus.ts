@@ -4,6 +4,5 @@ export const PostStatus = {
     ARCHIVED: 'ARCHIVED',
   } as const;
   
-  export type PostStatus =
-    (typeof PostStatus)[keyof typeof PostStatus];
+
   

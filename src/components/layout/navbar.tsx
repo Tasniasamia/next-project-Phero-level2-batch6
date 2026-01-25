@@ -29,6 +29,9 @@ import {
 import Link from "next/link";
 import { ModeToggle } from "./modeToggle";
 import { useAuth } from "@/providers/authProvider";
+import { useEffect, useState } from "react";
+import { getUser } from "@/actions/user.action";
+import { roles } from "@/constants/roles";
 
 interface MenuItem {
   title: string;
@@ -61,7 +64,6 @@ interface Navbar1Props {
 }
 
 const Navbar1 = ({
-  // data,
   logo = {
     url: "https://www.shadcnblocks.com",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
@@ -70,7 +72,7 @@ const Navbar1 = ({
   },
   menu = [
     { title: "Home", url: "/" },
-   
+
     {
       title: "About",
       url: "/about",
@@ -83,15 +85,30 @@ const Navbar1 = ({
       title: "Contact",
       url: "/contact",
     },
+    
   ],
   auth = {
     login: { title: "Login", url: "/login" },
     signup: { title: "Sign up", url: "/signup" },
   },
   className,
+
 }: Navbar1Props) => {
-  const data=useAuth();
+  // const data=useAuth();
   // console.log("provider data2",data);
+
+  const [user, setUser] = useState<null | any>();
+  useEffect(() => {
+    (async () => {
+      const data = await getUser();
+      setUser(data?.data);
+    })();
+  }, []);
+  user?.role === roles.ADMIN ? menu.push( {
+    title: "dashboard",
+    url: "/admin",
+  }): user?.role === roles.USER && menu.push({title:"dashboard",url:"/dashboard/create_blog"})
+  console.log("navber user data", user);
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto py-4">
@@ -119,9 +136,9 @@ const Navbar1 = ({
           </div>
           <div className="flex gap-2">
             <ModeToggle />
-            {data ? (
-                    <div className="text-red-500">{data?.user?.name || "user"}</div>
-                  ) : (
+            {user ? (
+              <div className="text-red-500">{user?.name || "user"}</div>
+            ) : (
               <div>
                 <Button asChild variant="outline" size="sm">
                   <Link href={auth.login.url}>{auth.login.title}</Link>
@@ -130,7 +147,7 @@ const Navbar1 = ({
                   <Link href={auth.signup.url}>{auth.signup.title}</Link>
                 </Button>
               </div>
-           )} 
+            )}
           </div>
         </nav>
 
@@ -174,14 +191,18 @@ const Navbar1 = ({
                   {/* {data ? (
                     <div className="text-red-500">{data?.name || "user"}</div>
                   ) : ( */}
-                    <div className="flex flex-col gap-3">
-                      <Button asChild variant="outline">
-                        <a href={auth.login.url}>{auth.login.title}</a>
+                  {user ? (
+                    <div className="text-red-500">{user?.name || "user"}</div>
+                  ) : (
+                    <div>
+                      <Button asChild variant="outline" size="sm">
+                        <Link href={auth.login.url}>{auth.login.title}</Link>
                       </Button>
-                      <Button asChild>
-                        <a href={auth.signup.url}>{auth.signup.title}</a>
+                      <Button asChild size="sm">
+                        <Link href={auth.signup.url}>{auth.signup.title}</Link>
                       </Button>
                     </div>
+                  )}
                   {/* )} */}
                 </div>
               </SheetContent>

@@ -1,5 +1,4 @@
 "use client"
-
 import * as React from "react"
 import {
   IconCamera,
@@ -33,14 +32,16 @@ import {
 } from "@/components/ui/sidebar"
 import { adminRoutes } from "@/routes/adminRoutes"
 import { userRoutes } from "@/routes/userRoutes"
+import { roles } from "@/constants/roles"
+import { Role } from "@/types"
 
 
 
-export function AppSidebar({userRole, ...props }: {userRole:{role:string} & React.ComponentProps<typeof Sidebar>}) {
+export function AppSidebar({userRole, ...props }: {userRole:{role:Role} & React.ComponentProps<typeof Sidebar>}) {
   const routes =
-    userRole?.role === "admin"
+    userRole?.role === roles.ADMIN
       ? adminRoutes
-      : userRole?.role === "user"
+      : userRole?.role === roles.USER
       ? userRoutes
       : null; 
   
