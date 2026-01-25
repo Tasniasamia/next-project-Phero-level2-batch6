@@ -79,14 +79,28 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
   });
 
-  const handleSocialSign = async () => {
-    const toatId = toast.loading("Creating User");
 
-    const data = await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "http://localhost:3000",
-    });
+const handleSocialSign = async () => {
+    const toastId = toast.loading("Continuing with Google...");
+  
+    try {
+      const res = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "http://localhost:3000",
+      });
+  
+      if (res?.error) {
+        toast.error(res.error.message, { id: toastId });
+        return;
+      }
+  
+      toast.success("Welcome!", { id: toastId });
+    } catch (err: any) {
+      toast.error(err?.message || "Something went wrong", { id: toastId });
+    }
   };
+  
+  
   return (
     <Card {...props}>
       <CardHeader>
