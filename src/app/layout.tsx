@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import './globals.css';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Toaster } from "sonner";
 // import { AuthProvider } from "@/providers/authProvider";
 // import { userService } from "@/services/user.service";
 const geistSans = Geist({
@@ -51,7 +52,8 @@ export default async function RootLayout({
         {children}
         {/* </AuthProvider> */}
       </ThemeProvider>
-      
+      <Toaster />
+
       </body>
     </html>
   );
