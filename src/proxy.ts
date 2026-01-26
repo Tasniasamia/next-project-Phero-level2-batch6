@@ -1,3 +1,5 @@
+"use server";
+
 import { NextRequest, NextResponse } from "next/server";
 import { userService } from "./services/user.service";
 import { roles } from "./constants/roles";

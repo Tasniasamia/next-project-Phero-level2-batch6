@@ -37,16 +37,13 @@ export function LoginForm({
       }
     })
     .then(function (response) {
-      console.log(response);
       if(response?.data?.twoFactorRedirect){
 
-        console.log(response);
        alert('Please verify your otp')
       }
     })
     .catch(function (error) {
       alert(error?.message);
-      console.log(error);
     })
   }
   return (

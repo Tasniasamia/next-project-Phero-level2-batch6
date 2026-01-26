@@ -27,7 +27,6 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     const password = formData.get("password") as string
     const confirmPassword = formData.get("confirmPassword") as string
   
-    console.log({ name, email, password, confirmPassword })
   
     if (password !== confirmPassword) {
       alert("Password does not match")
@@ -45,7 +44,6 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       }
     })
     .then(function (response) {
-      console.log(response);
       if(response){
        alert('Please check your email')
       }

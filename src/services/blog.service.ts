@@ -1,11 +1,11 @@
-import { PostStatus } from "@/constants/postStatus";
 import { env } from "@/env";
+import { PostStatustype } from "@/types/post.status.type";
 
 interface QueryOptions {
   search: string ;
   tags: string;
   isFeatured: boolean ;
-  status: PostStatus;
+  status: PostStatustype;
   authId: string ;
   page: number;
   limit: number;
@@ -24,7 +24,6 @@ export const blogService = {
     options?: TOptions
   ) => {
     try {
-      console.log("coming here");
       const url = new URL(`${env.BACKEND_URL}/post`);
       if(queries){
         Object.entries(queries).forEach(([key, value]) => {
@@ -48,7 +47,6 @@ export const blogService = {
       }
       const res = await fetch(url.toString(), config);
       const data = await res.json();
-      console.log("data of service",data);
 
       
       return {data:data,error:null}

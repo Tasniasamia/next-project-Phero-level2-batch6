@@ -48,7 +48,6 @@ export const getPost = async (
     };
 
     const blogData = await blogService.getPost(queries,options);
-console.log("blogData",blogData);
     return { data: blogData.data, error: null };
   } catch (error) {
     return { data: null, error };

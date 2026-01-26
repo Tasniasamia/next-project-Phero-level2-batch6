@@ -43,8 +43,8 @@
 
 "use client";
 
+import { PostStatustype } from "@/types/post.status.type";
 import { use } from "react";
-import { PostStatus } from "@/constants/postStatus";
 
 export interface Post {
   id: number;
@@ -52,7 +52,7 @@ export interface Post {
   content: string;
   thumbnail?: string | null;
   isFeatured: boolean;
-  status: PostStatus;
+  status: PostStatustype;
   tags: string[];
   views: number;
   authId: string;

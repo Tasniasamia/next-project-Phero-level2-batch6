@@ -7,7 +7,8 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar"
 import { userService } from "@/services/user.service"
-import { Role, roles } from "@/constants/roles"
+import {  roles } from "@/constants/roles"
+import { Role } from "@/types"
 /* use client*/
 // import { setRoleCookie } from "@/helpers/utils";
 // import React, { useEffect } from "react"
@@ -19,10 +20,8 @@ export default async function Page({admin,user}:{admin:React.ReactNode,user:Reac
     // useEffect(()=>{
     //   setRoleCookie(userRole?.role);
     // },[userRole?.role])
-    console.log("coming here");
 
     const {data,error}=await userService.getSession();
-    console.log(data);
     const role = data?.data?.user?.role;
     type UserRole = {
       role: Role;
@@ -34,7 +33,6 @@ export default async function Page({admin,user}:{admin:React.ReactNode,user:Reac
     
   
     
-       console.log("userRole",userRole);
   return (
     <SidebarProvider
       style={

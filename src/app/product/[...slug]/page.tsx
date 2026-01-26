@@ -7,7 +7,6 @@ export default function ProductPostPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = use(params)
- console.log(slug);
   return (
     <div>
       {/* <p>{slug?.map((i)=>{

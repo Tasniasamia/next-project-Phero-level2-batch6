@@ -1,4 +1,4 @@
-import { PostStatus } from "@/constants/postStatus";
+import { PostStatustype } from "./post.status.type";
 
 export interface Post {
     id: number;
@@ -8,7 +8,7 @@ export interface Post {
     thumbnail?: string | null;
   
     isFeatured: boolean;
-    status: PostStatus;
+    status: PostStatustype;
   
     tags: string[];
     views: number;

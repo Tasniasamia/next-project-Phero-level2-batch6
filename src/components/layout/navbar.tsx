@@ -112,7 +112,6 @@ const Navbar1 = ({
   //   title: "dashboard",
   //   url: "/admin",
   // }): user?.role === roles.USER && menu.push({title:"dashboard",url:"/dashboard/create_blog"})
-  console.log("navber user data", user);
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto py-4">

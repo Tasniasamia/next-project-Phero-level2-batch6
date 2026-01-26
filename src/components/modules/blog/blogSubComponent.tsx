@@ -9,20 +9,17 @@ const BlogSubComponent = () => {
     const [error,setError]=useState<null|any>({});
     useEffect(()=>{
         (async()=>{
-            console.log("coming here");
 
             const res = await getPost(
                 {page:1,limit:6},
                 { cache: "no-store" }
               );
-              console.log("resdata",res);
          setData(res?.data);
          setError(res?.error);
 
         })()
     },[])
 
-    console.log("data",data);
 
     return (
         <div>
