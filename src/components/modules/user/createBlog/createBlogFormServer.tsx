@@ -41,8 +41,7 @@ const CreateBlogFormServer = async () => {
     };
     let res;
     try {
-      console.log("postBlogData ", postBlogData);
-      console.log("postBlogData 2 Json", JSON.stringify(postBlogData));
+ 
       const cookieStore = await cookies();
 
       const createBlogPost = await fetch(`${API_URL}/post`, {

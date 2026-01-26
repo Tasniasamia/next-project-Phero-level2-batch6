@@ -2,7 +2,9 @@
 
 import { PostStatus } from "@/constants/postStatus";
 import { blogService } from "@/services/blog.service";
+import { Post } from "@/types";
 import { PostStatustype } from "@/types/post.status.type";
+import { revalidateTag, updateTag } from "next/cache";
 
 interface QueryOptions {
   search: string;
@@ -35,7 +37,7 @@ export const getPost = async (
       authId: query?.authId ?? "",
 
       page: query?.page ?? 1,
-      limit: query?.limit ?? 10,
+      limit: query?.limit ?? 100,
       skip: query?.skip ?? 0,
 
       sortBy: query?.sortBy ?? "createdAt",
@@ -52,4 +54,16 @@ export const getPost = async (
   } catch (error) {
     return { data: null, error };
   }
+};
+
+
+export const createBlogPost=async(postBlogData:Omit<Post,'createdAt'|'updatedAt'|'views'|'isFeatured'|'status'|'id'|'comments'>)=>{
+
+  const blogData = await blogService.createPost(postBlogData);
+  updateTag('posts');
+  if (blogData?.data) {
+    return blogData;
+  }
+
+  return blogData;
 };
