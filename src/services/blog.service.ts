@@ -24,18 +24,26 @@ interface TOptions {
 const API_URL = env.BACKEND_URL;
 
 export const blogService = {
-  getPost: async (queries?: QueryOptions, options?: TOptions) => {
+  getPost: async (queries?: Partial<QueryOptions>, options?: Partial<TOptions>) => {
     try {
       const url = new URL(`${API_URL}/post`);
       if (queries) {
         Object.entries(queries).forEach(([key, value]) => {
-          //  if((value!="") && (value!=undefined) && (value!=null)){
-          //   url.searchParams.append(key, value);
-          //  }
-          // console.log("key",key,"value",value)
-          if (!["", undefined, null].includes(value)) {
+           if((value!="") && (value!=undefined) && (value!=null)){
             url.searchParams.append(key, String(value));
-          }
+           }
+          // console.log("key",key,"value",value)
+          // if (!["", undefined, null].includes(value)) {
+          //   url.searchParams.append(key, String(value));
+          // }
+          // if (
+          //   value !== undefined &&
+          //   value !== null &&
+          //   value !== ""
+          // ) {
+          //   url.searchParams.append(key, String(value));
+          // }
+          
         });
       }
 

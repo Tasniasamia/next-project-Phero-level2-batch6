@@ -13,6 +13,10 @@ export const userRoutes:route= {
         url: "/dashboard/create_blog",
       },
       {
+        name:'History',
+        url:'/dashboard/history'
+      },
+      {
         name: "Setting",
         url: "/dashboard/setting",
       },
