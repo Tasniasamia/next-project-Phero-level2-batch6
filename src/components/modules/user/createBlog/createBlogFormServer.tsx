@@ -19,12 +19,22 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { env } from "@/env";
+import { blogService } from "@/services/blog.service";
 import { userService } from "@/services/user.service";
 import { Post } from "@/types";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const CreateBlogFormServer = async () => {
+
+  /* parallel Fetching start*/
+
+  // const userData = userService.getSession();
+  // const blogData=blogService.getPost();
+  // const [user,blog]=await Promise.all([userData,blogData])
+  
+    /* parallel Fetching end*/
+
   const { data, error } = await userService.getSession();
   const API_URL = env.BACKEND_URL;
   const postBlog = async (form: any) => {
